@@ -13,6 +13,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: '全部网络',
         link: '/pages/tables/cluster-table',
       },
+      {
+        title: '新建网络',
+        link: '/pages/tables/add-net',
+      },
     ],
   },
   {

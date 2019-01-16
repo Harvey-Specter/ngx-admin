@@ -1,10 +1,22 @@
 <nb-card>
   <nb-card-header>
-    网络
+    <span>网络</span>
+    <button nbButton size="small" status="primary">创建网络</button>
   </nb-card-header>
 
   <nb-card-body>
+    <div [style.display]="hasData ? 'block' : 'none'">
     <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
-    </ng2-smart-table>
+    </ng2-smart-table></div>
+    <div class = "add" [style.display]="hasData ? 'none'  : 'block'">
+      <i class="fab fa-schlix"></i>
+      <div class="btn-group btn-group-full-width" role="group">
+        <button type="button" class="btn btn-primary btn-group-icon btn-group-divider btn-fixed">
+          <i class="fas fa-plus"></i>
+        </button>
+        <button type="button" class="btn btn-primary">创建网络</button>
+      </div>
+    </div>
+
   </nb-card-body>
 </nb-card>

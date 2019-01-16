@@ -2,19 +2,19 @@ import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
-  selector: 'ngx-temperature',
+  selector: 'ngx-basenet',
   styleUrls: ['./basenet.component.scss'],
   templateUrl: './basenet.component.html',
 })
-export class TemperatureComponent implements OnDestroy {
+export class BasenetComponent implements OnDestroy {
 
   temperature = 24;
-  temperatureOff = false;
+  // temperatureOff = false;
   temperatureMode = 'cool';
 
-  humidity = 87;
-  humidityOff = false;
-  humidityMode = 'heat';
+  // humidity = 87;
+  // humidityOff = false;
+  // humidityMode = 'heat';
 
   colors: any;
   themeSubscription: any;

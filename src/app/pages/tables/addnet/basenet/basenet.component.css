@@ -1,23 +1,39 @@
 /*
-Error: File to import not found or unreadable: ../../../@theme/styles/themes.
+Error: File to import not found or unreadable: ~@nebular/theme/styles/theming.
        Load paths:
          
-        on line 1 of temperature.component.scss
+        on line 2 of ../../../../@theme/styles/themes.scss
+        from line 1 of basenet.component.scss
 
-1: @import '../../../@theme/styles/themes';
+1: @import '../../../../@theme/styles/themes';
 2: @import '~bootstrap/scss/mixins/breakpoints';
 3: @import '~@nebular/theme/styles/global/breakpoints';
 4: 
 5: @include nb-install-component() {
 6: 
+7:   .btn-group {
 
 Backtrace:
-temperature.component.scss:1
+../../../../@theme/styles/themes.scss:2
+basenet.component.scss:1
 /usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/import_node.rb:66:in `rescue in import'
 /usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/import_node.rb:45:in `import'
 /usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/import_node.rb:28:in `imported_file'
 /usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/import_node.rb:37:in `css_import?'
 /usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:311:in `visit_import'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/visitors/base.rb:36:in `visit'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/stack.rb:79:in `block in with_base'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/stack.rb:115:in `with_frame'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/stack.rb:79:in `with_base'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:325:in `block (2 levels) in visit_import'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:325:in `map'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:325:in `block in visit_import'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/stack.rb:88:in `block in with_import'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/stack.rb:115:in `with_frame'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/stack.rb:88:in `with_import'
+/usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:322:in `visit_import'
 /usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/visitors/base.rb:36:in `visit'
 /usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
 /usr/local/lib/ruby/gems/1.9.1/gems/sass-3.4.13/lib/sass/stack.rb:79:in `block in with_base'
@@ -55,4 +71,4 @@ temperature.component.scss:1
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: ../../../@theme/styles/themes.\A        Load paths:\A          \A         on line 1 of temperature.component.scss\A \A 1: @import '../../../@theme/styles/themes';\A 2: @import '~bootstrap/scss/mixins/breakpoints';\A 3: @import '~@nebular/theme/styles/global/breakpoints';\A 4: \A 5: @include nb-install-component() {\A 6: "; }
+  content: "Error: File to import not found or unreadable: ~@nebular/theme/styles/theming.\A        Load paths:\A          \A         on line 2 of ../../../../@theme/styles/themes.scss\A         from line 1 of basenet.component.scss\A \A 1: @import '../../../../@theme/styles/themes';\A 2: @import '~bootstrap/scss/mixins/breakpoints';\A 3: @import '~@nebular/theme/styles/global/breakpoints';\A 4: \A 5: @include nb-install-component() {\A 6: \A 7:   .btn-group {"; }

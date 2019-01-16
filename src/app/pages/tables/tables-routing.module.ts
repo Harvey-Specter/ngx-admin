@@ -4,11 +4,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { TablesComponent } from './tables.component';
 import { SmartTableComponent } from './smart-table/smart-table.component';
 import {ClusterTableComponent} from './cluster-table/cluster-table.component';
+import {AddnetComponent} from './addnet/addnet.component';
+import {BasenetComponent} from './addnet/basenet/basenet.component';
 
 const routes: Routes = [{
   path: '',
   component: TablesComponent,
   children: [{
+    path: 'add-net',
+    component: AddnetComponent,
+  }, {
     path: 'smart-table',
     component: SmartTableComponent,
   },
@@ -28,4 +33,6 @@ export const routedComponents = [
   TablesComponent,
   SmartTableComponent,
   ClusterTableComponent,
+  AddnetComponent,
+  BasenetComponent,
 ];

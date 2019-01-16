@@ -10,10 +10,28 @@ import { ClusterTableService } from '../../../@core/data/cluster-table.service';
     nb-card {
       transform: translate3d(0, 0, 0);
     }
+    nb-card-header {
+      padding-bottom: 0.2rem;
+    }
+    nb-card span {
+      line-height: 2;
+    }
+    [nbButton] {
+      float:right
+    }
+    nb-card-body {
+      min-height: 35rem;
+    }
+    .add {
+      text-align: center;
+    }
+    .fab {
+      font-size: 30rem;
+    }
   `],
 })
 export class ClusterTableComponent {
-
+  hasData = true;
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -61,6 +79,11 @@ export class ClusterTableComponent {
 
   constructor(private service: ClusterTableService) {
     const data = this.service.getData();
+    if (data.length === 0 ) {
+      this.hasData = false;
+    } else {
+      this.hasData = true;
+    }
     this.source.load(data);
   }
 

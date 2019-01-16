@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class SmartTableService {
+export class ClusterTableService {
 
   data = [{
     id: 1,
@@ -426,6 +426,7 @@ export class SmartTableService {
   }];
 
   getData() {
-    return this.data;
+    // return [];
+     return this.data;
   }
 }
