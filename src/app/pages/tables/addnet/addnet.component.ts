@@ -26,7 +26,7 @@ export class AddnetComponent implements OnInit {
 
   createOrgs() {
     this.orgs = [];
-    for (let i = 1; i <= this.orgCnt-1; i ++) {
+    for (let i = 1; i <= this.orgCnt - 1; i ++) {
       console.info('数的值：' + i);
       this.orgs.push(i);
     }
