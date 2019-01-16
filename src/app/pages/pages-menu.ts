@@ -2,6 +2,20 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
+    title: 'Tables',
+    icon: 'nb-tables',
+    children: [
+      {
+        title: 'Smart Table',
+        link: '/pages/tables/smart-table',
+      },
+      {
+        title: '全部网络',
+        link: '/pages/tables/cluster-table',
+      },
+    ],
+  },
+  {
     title: 'E-commerce',
     icon: 'nb-e-commerce',
     link: '/pages/dashboard',
@@ -210,16 +224,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'CKEditor',
         link: '/pages/editors/ckeditor',
-      },
-    ],
-  },
-  {
-    title: 'Tables',
-    icon: 'nb-tables',
-    children: [
-      {
-        title: 'Smart Table',
-        link: '/pages/tables/smart-table',
       },
     ],
   },

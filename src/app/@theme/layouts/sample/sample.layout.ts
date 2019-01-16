@@ -9,12 +9,17 @@ import {
   NbThemeService,
 } from '@nebular/theme';
 
-import { StateService } from '../../../@core/data/state.service';
+import { StateService  } from '../../../@core/data/state.service';
 
 // TODO: move layouts into the framework
 @Component({
   selector: 'ngx-sample-layout',
-  styleUrls: ['./sample.layout.scss'],
+  styles: [`
+    li , .dropdown span {
+      font-weight: 700;
+    }
+  `],
+  // styleUrls: ['./sample.layout.scss'],
   template: `
     <nb-layout [center]="layout.id === 'center-column'" windowMode>
       <nb-layout-header fixed>
@@ -26,9 +31,21 @@ import { StateService } from '../../../@core/data/state.service';
                    responsive
                    [end]="sidebar.id === 'end'">
         <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
-          <a href="#" class="btn btn-hero-success main-btn">
-            <i class="ion ion-social-github"></i> <span>全局</span>
-          </a>
+          <!-- a href="#" class="btn btn-hero-success main-btn">
+            <i class="fas fa-globe-americas"></i>
+            <span> 全局</span>
+          </a -->
+          <div class="dropdown" ngbDropdown>
+            <button class="btn btn-success" type="button" ngbDropdownToggle>
+              <i class="fas fa-globe-americas"></i>
+              <span> 全局</span>
+            </button>
+            <ul class="dropdown-menu" ngbDropdownMenu>
+              <li class="dropdown-item">Icon Button</li>
+              <li class="dropdown-item">Hero Button</li>
+              <li class="dropdown-item">Default</li>
+            </ul>
+          </div>
         </nb-sidebar-header>
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>

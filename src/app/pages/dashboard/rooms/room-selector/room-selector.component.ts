@@ -75,6 +75,7 @@ export class RoomSelectorComponent {
   }
 
   selectRoom(roomNumber) {
+    //console.log('---selectRoom----',roomNumber);
     this.select.emit(roomNumber);
     this.selectedRoom = roomNumber;
     this.sortRooms();
