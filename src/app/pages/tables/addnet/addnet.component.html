@@ -1,0 +1,141 @@
+<div class="steppers-container row">
+  <div class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card>
+      <nb-card-body>
+        <nb-stepper #stepper>
+          <nb-step [stepControl]="firstForm" label="基本信息">
+            <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+              <p class="lorem">
+              创建区块链网络第一步：选择基础网络架构；填写网络名称，及联盟中的组织数量
+              </p>
+              <ngx-basenet></ngx-basenet>
+
+
+              <div class="row">
+              <div [ngClass]="{'form-group col-md-12 col-lg-12 col-xxxl-12':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
+                <label for="netName">网络名称</label> <a [ngClass]="{'d-none':desc,'add-desc':!desc}" href="javascript:void(0);" (click)="showDesc()">描述</a>
+                <input value = "netname" id="netName" type="text" placeholder="例如：我的第一个网络" class="form-control" formControlName="firstCtrl"
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+
+              <div [ngClass]="{'d-none':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
+                <label for="netDesc">网络描述</label> <a class="add-desc" href="javascript:void(0);" (click)="showDesc()">描述</a>
+                <input value = "netdesc" id="netDesc" type="text" placeholder="例如：我的第一个网络描述" class="form-control" formControlName="firstCtrl"
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+
+              </div>
+              <div class="row">
+              <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
+                <label for="orderType">排序服务类型</label>
+                <select id="orderType" class="form-control">
+                  <option>Kafka</option>
+                  <option>Solo</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
+                <label for="orgCnt">成员组织数量</label>
+                <input value = "1" id="orgCnt" type="text" placeholder="例如：1" class="form-control" type="number" (input)="setOrgCnt($event)"
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+              </div>
+
+              <button nbButton nbStepperNext (click)="createOrgs()">下一步</button>
+            </form>
+          </nb-step>
+          <!--------------基本信息----------------------->
+          <nb-step [stepControl]="secondForm" label="组织信息">
+            <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+              <p class="lorem">
+                Pellentesque we gonna chung tortor.
+                Sizzle pizzle. Fizzle izzle dolor dapibus fo shizzle mah nizzle fo rizzle, mah home g-dizzle tempus tempor.
+                Maurizzle cool nibh owned turpizzle. My shizz fo shizzle tortor.
+              </p>
+
+              <div class="row">
+              <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                <label for="orderOrgName">排序组织名称</label>
+                <input value = "orderOrg" id="orderOrgName" type="text" placeholder="例如：orderOrg" class="form-control"
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+
+              <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                <label for="orderOrgDomain">排序组织域</label>
+                <input value = "example.com" id="orderOrgDomain" type="text" placeholder="例如：example.com" class="form-control"
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+
+              <div class="form-group col-md-2 col-lg-2 col-xxxl-2">
+                <label for="orderOrgPeers">排序节点数</label>
+                <input value = "1" id="orderOrgPeers" type="text" placeholder="例如：1" class="form-control"
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+              </div>
+<!-----------下面是成员组织-------------->
+              <div class="row" style="height: 5.7rem" >
+                <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                  <label for="orgName">组织名称</label>
+                  <input value = "orderOrg" name="orgName" type="text" placeholder="例如：orderOrg" class="form-control"
+                         [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                </div>
+                <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                  <label for="orgDomain">组织idx域</label>
+                  <input value = "example.com" id="orgDomain" type="text" placeholder="例如：example.com" class="form-control"
+                         [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                </div>
+                <div class="form-group col-md-2 col-lg-2 col-xxxl-2">
+                  <label for="orgPeers">组织idx节点数</label>
+                  <input value = "1" id="orgPeers" type="text" placeholder="例如：1" class="form-control"
+                         [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                </div>
+              </div>
+              <div class="row" style="height: 4rem" *ngFor="let idx of orgs">
+                <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                  <!-- label for="orgName">组织{{idx}}名称</label -->
+                  <input value = "orderOrg" id="orgName" type="text" placeholder="例如：orderOrg" class="form-control"
+                         [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                </div>
+                <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                  <!--label for="orgDomain">组织idx域</label-->
+                  <input value = "example.com" id="orgDomain" type="text" placeholder="例如：example.com" class="form-control"
+                         [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                </div>
+                <div class="form-group col-md-2 col-lg-2 col-xxxl-2">
+                  <!--label for="orgPeers">组织idx节点数</label-->
+                  <input value = "1" id="orgPeers" type="text" placeholder="例如：1" class="form-control"
+                         [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                </div>
+              </div>
+              <div style="margin-top: 2rem">
+              <button nbButton nbStepperPrevious>上一步</button>
+              <button nbButton nbStepperNext>下一步</button>
+              </div>
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="thirdForm" label="节点信息">
+            <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+              <p class="lorem">
+                Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
+              </p>
+              <div class="input-group">
+                <input type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
+                       [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+              </div>
+              <button nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperNext>Confirm</button>
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
+            <div class="step-container">
+              <h3>Wizard completed!</h3>
+              <button nbButton (click)="stepper.reset()">Try again</button>
+            </div>
+          </nb-step>
+        </nb-stepper>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+
+</div>
