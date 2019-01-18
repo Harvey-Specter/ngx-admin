@@ -20,9 +20,9 @@ export class BasenetComponent implements OnDestroy {
   themeSubscription: any;
 
   constructor(private theme: NbThemeService) {
-    // this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-    //   this.colors = config.variables;
-    // });
+    this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
+      this.colors = config.variables;
+    });
   }
 
   ngOnDestroy() {
