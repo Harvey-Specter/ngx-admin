@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'ngx-stepper',
@@ -8,17 +8,10 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class AddnetComponent implements OnInit {
 
-  // private firstForm: FormGroup;
+  private firstForm: FormGroup;
   private secondForm: FormGroup;
   private thirdForm: FormGroup;
 
-  firstForm = this.fb.group({
-    nettype: [''],
-    netname: [''],
-    netdesc: [''],
-    ordertype: [''],
-    orgcnt: ['2'],
-  });
   desc = 0;
   // orderOrgCnt = 0;
   orgCnt = 1;
@@ -26,13 +19,6 @@ export class AddnetComponent implements OnInit {
   orgs: any[] = [];
 
   constructor(private fb: FormBuilder) {
-    this.firstForm = this.fb.group({
-      nettype: [''],
-      netname: '',
-      netdesc: [''],
-      ordertype: [''],
-      orgcnt: ['2'],
-    });
   }
 
   setOrgCnt($event) {
@@ -54,11 +40,34 @@ export class AddnetComponent implements OnInit {
 
   ngOnInit() {
     this.firstForm = this.fb.group({
-      firstCtrl: ['', Validators.required],
+      nettype: ['1'],
+      netname: 'c1',
+      netdesc: ['desc'],
+      ordertype: ['Solo'],
+      orgcnt: ['2'],
     });
 
     this.secondForm = this.fb.group({
-      secondCtrl: ['', Validators.required],
+      // secondCtrl: ['', Validators.required],
+      orderorgname: this.fb.array([
+        this.fb.control(''),
+      ]),
+      orderorgdomain: this.fb.array([
+        this.fb.control(''),
+      ]),
+      orderorgcnt: this.fb.array([
+        this.fb.control(''),
+      ]),
+
+      orgname: this.fb.array([
+        this.fb.control(''),
+      ]),
+      orgdomain: this.fb.array([
+        this.fb.control(''),
+      ]),
+      orgcnt: this.fb.array([
+        this.fb.control(''),
+      ]),
     });
 
     this.thirdForm = this.fb.group({
@@ -67,7 +76,15 @@ export class AddnetComponent implements OnInit {
   }
 
   onFirstSubmit() {
-    this.firstForm.markAsDirty();
+    // this.firstForm.markAsDirty();
+    console.info(this.firstForm.value.orgcnt);
+
+    // this.firstForm.get('orgcnt') as FormContro
+    const orgnames = this.secondForm.get('orgname') as FormArray;
+    for (let i = 1 ; i < this.firstForm.value.orgcnt; i++) {
+      // this.secondForm.
+      orgnames.push(new FormControl());
+    }
   }
 
   onSecondSubmit() {

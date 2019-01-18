@@ -6,23 +6,22 @@
           <nb-step [stepControl]="firstForm" label="基本信息">
             <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
               <p class="lorem">
-              <!-- 创建区块链网络第一步：选择基础网络架构；填写网络名称，及联盟中的组织数量 --》
+              <!-- 创建区块链网络第一步：选择基础网络架构；填写网络名称，及联盟中的组织数量 -->
               </p>
-              <!-- ngx-basenet></ngx-basenet -->
               <nb-card size="xxsmall" class="net-type">
                 <div ngbRadioGroup data-toggle="buttons"
                      class="btn-group btn-group-toggle btn-divided-group btn-outline-divided-group btn-group-full-width">
                   <label ngbButtonLabel class="btn btn-icon">
-                    <input ngbButton type="radio" value="1"/>Kubernetes<!--i class="nb-snowy-circled"></i -->
+                    <input  formControlName="nettype" ngbButton type="radio" value="1"/>Kubernetes<!--i class="nb-snowy-circled"></i -->
                   </label>
                   <label ngbButtonLabel class="btn btn-icon">
-                    <input ngbButton type="radio" value="2"/>Swarm<!-- i class="nb-sunny-circled"></i -->
+                    <input  formControlName="nettype" ngbButton type="radio" value="2"/>Swarm<!-- i class="nb-sunny-circled"></i -->
                   </label>
                   <label ngbButtonLabel class="btn btn-icon">
-                    <input  ngbButton type="radio" value="3"/>Docker<!-- i class="nb-flame-circled"></i -->
+                    <input  formControlName="nettype"  ngbButton type="radio" value="3"/>Docker<!-- i class="nb-flame-circled"></i -->
                   </label>
                   <label ngbButtonLabel class="btn btn-icon">
-                    <input  ngbButton type="radio" value="4"/>import<!-- i class="nb-loop-circled"></i -->
+                    <input  formControlName="nettype"  ngbButton type="radio" value="4"/>import<!-- i class="nb-loop-circled"></i -->
                   </label>
                 </div>
               </nb-card>
@@ -30,33 +29,33 @@
               <div class="row">
               <div [ngClass]="{'form-group col-md-12 col-lg-12 col-xxxl-12':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
                 <label for="netname">网络名称</label> <a [ngClass]="{'d-none':desc,'add-desc':!desc}" href="javascript:void(0);" (click)="showDesc()">描述</a>
-                <input type="text" placeholder="例如：我的第一个网络" class="form-control" formControlName="netname">
+                <input id="netname" type="text" placeholder="例如：我的第一个网络" class="form-control" formControlName="netname">
               </div>
 
               <div [ngClass]="{'d-none':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
                 <label for="netdesc">网络描述</label> <a class="add-desc" href="javascript:void(0);" (click)="showDesc()">描述</a>
                 <input value = "netdesc" id="netdesc" type="text" placeholder="例如：我的第一个网络描述" class="form-control"
-                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}" formControlName="netdesc">
               </div>
 
               </div>
               <div class="row">
               <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
                 <label for="ordertype">排序服务类型</label>
-                <select id="ordertype" class="form-control">
-                  <option>Kafka</option>
-                  <option>Solo</option>
+                <select id="ordertype" class="form-control" formControlName="ordertype">
+                  <option value="Kafka">Kafka</option>
+                  <option value="Solo">Solo</option>
                 </select>
               </div>
 
               <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
                 <label for="orgcnt">成员组织数量</label>
                 <input value = "1" id="orgcnt" type="text" placeholder="例如：1" class="form-control" type="number" (input)="setOrgCnt($event)"
-                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}" formControlName="orgcnt">
               </div>
               </div>
 
-              <button nbButton nbStepperNext (click)="createOrgs()">下一步</button>
+              <button nbButton nbStepperNext (click)="onFirstSubmit()">下一步</button>
             </form>
           </nb-step>
           <!--------------基本信息----------------------->
@@ -96,18 +95,17 @@
                 </div>
                 <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
                   <label for="orgDomain">组织idx域</label>
-                  <input value = "example.com" id="orgDomain" type="text" placeholder="例如：example.com" class="form-control"
+                  <input value = "example.com" id="orgDomain1" type="text" placeholder="例如：example.com" class="form-control"
                          [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
                 </div>
                 <div class="form-group col-md-2 col-lg-2 col-xxxl-2">
                   <label for="orgPeers">组织idx节点数</label>
-                  <input value = "1" id="orgPeers" type="text" placeholder="例如：1" class="form-control"
+                  <input value = "1" id="orgPeers2" type="text" placeholder="例如：1" class="form-control"
                          [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
                 </div>
               </div>
               <div class="row" style="height: 4rem" *ngFor="let idx of orgs">
                 <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
-                  <!-- label for="orgName">组织{{idx}}名称</label -->
                   <input value = "orderOrg" id="orgName" type="text" placeholder="例如：orderOrg" class="form-control"
                          [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
                 </div>
