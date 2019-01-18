@@ -6,37 +6,52 @@
           <nb-step [stepControl]="firstForm" label="基本信息">
             <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
               <p class="lorem">
-              创建区块链网络第一步：选择基础网络架构；填写网络名称，及联盟中的组织数量
+              <!-- 创建区块链网络第一步：选择基础网络架构；填写网络名称，及联盟中的组织数量 --》
               </p>
-              <ngx-basenet></ngx-basenet>
-
+              <!-- ngx-basenet></ngx-basenet -->
+              <nb-card size="xxsmall" class="net-type">
+                <div ngbRadioGroup data-toggle="buttons"
+                     class="btn-group btn-group-toggle btn-divided-group btn-outline-divided-group btn-group-full-width">
+                  <label ngbButtonLabel class="btn btn-icon">
+                    <input ngbButton type="radio" value="1"/>Kubernetes<!--i class="nb-snowy-circled"></i -->
+                  </label>
+                  <label ngbButtonLabel class="btn btn-icon">
+                    <input ngbButton type="radio" value="2"/>Swarm<!-- i class="nb-sunny-circled"></i -->
+                  </label>
+                  <label ngbButtonLabel class="btn btn-icon">
+                    <input  ngbButton type="radio" value="3"/>Docker<!-- i class="nb-flame-circled"></i -->
+                  </label>
+                  <label ngbButtonLabel class="btn btn-icon">
+                    <input  ngbButton type="radio" value="4"/>import<!-- i class="nb-loop-circled"></i -->
+                  </label>
+                </div>
+              </nb-card>
 
               <div class="row">
               <div [ngClass]="{'form-group col-md-12 col-lg-12 col-xxxl-12':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
-                <label for="netName">网络名称</label> <a [ngClass]="{'d-none':desc,'add-desc':!desc}" href="javascript:void(0);" (click)="showDesc()">描述</a>
-                <input value = "netname" id="netName" type="text" placeholder="例如：我的第一个网络" class="form-control" formControlName="firstCtrl"
-                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                <label for="netname">网络名称</label> <a [ngClass]="{'d-none':desc,'add-desc':!desc}" href="javascript:void(0);" (click)="showDesc()">描述</a>
+                <input type="text" placeholder="例如：我的第一个网络" class="form-control" formControlName="netname">
               </div>
 
               <div [ngClass]="{'d-none':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
-                <label for="netDesc">网络描述</label> <a class="add-desc" href="javascript:void(0);" (click)="showDesc()">描述</a>
-                <input value = "netdesc" id="netDesc" type="text" placeholder="例如：我的第一个网络描述" class="form-control" formControlName="firstCtrl"
+                <label for="netdesc">网络描述</label> <a class="add-desc" href="javascript:void(0);" (click)="showDesc()">描述</a>
+                <input value = "netdesc" id="netdesc" type="text" placeholder="例如：我的第一个网络描述" class="form-control"
                        [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
               </div>
 
               </div>
               <div class="row">
               <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
-                <label for="orderType">排序服务类型</label>
-                <select id="orderType" class="form-control">
+                <label for="ordertype">排序服务类型</label>
+                <select id="ordertype" class="form-control">
                   <option>Kafka</option>
                   <option>Solo</option>
                 </select>
               </div>
 
               <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
-                <label for="orgCnt">成员组织数量</label>
-                <input value = "1" id="orgCnt" type="text" placeholder="例如：1" class="form-control" type="number" (input)="setOrgCnt($event)"
+                <label for="orgcnt">成员组织数量</label>
+                <input value = "1" id="orgcnt" type="text" placeholder="例如：1" class="form-control" type="number" (input)="setOrgCnt($event)"
                        [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
               </div>
               </div>

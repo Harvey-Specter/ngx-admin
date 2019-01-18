@@ -47,7 +47,8 @@ const routes: Routes = [{
     loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
   }, {
     path: '',
-    redirectTo: 'dashboard',
+    // /pages/tables/add-net
+    redirectTo: 'tables/add-net',
     pathMatch: 'full',
   }, {
     path: '**',

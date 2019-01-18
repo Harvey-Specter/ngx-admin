@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'ngx-stepper',
@@ -8,9 +8,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddnetComponent implements OnInit {
 
-  firstForm: FormGroup;
-  secondForm: FormGroup;
-  thirdForm: FormGroup;
+  // private firstForm: FormGroup;
+  private secondForm: FormGroup;
+  private thirdForm: FormGroup;
+
+  firstForm = this.fb.group({
+    nettype: [''],
+    netname: [''],
+    netdesc: [''],
+    ordertype: [''],
+    orgcnt: ['2'],
+  });
   desc = 0;
   // orderOrgCnt = 0;
   orgCnt = 1;
@@ -18,6 +26,13 @@ export class AddnetComponent implements OnInit {
   orgs: any[] = [];
 
   constructor(private fb: FormBuilder) {
+    this.firstForm = this.fb.group({
+      nettype: [''],
+      netname: '',
+      netdesc: [''],
+      ordertype: [''],
+      orgcnt: ['2'],
+    });
   }
 
   setOrgCnt($event) {
