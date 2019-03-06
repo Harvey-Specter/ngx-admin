@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import { delay, withLatestFrom, takeWhile } from 'rxjs/operators';
 import {
   NbMediaBreakpoint,
@@ -11,12 +11,19 @@ import {
 
 import { StateService  } from '../../../@core/data/state.service';
 
+
 // TODO: move layouts into the framework
 @Component({
   selector: 'ngx-sample-layout',
   styles: [`
     li , .dropdown span {
       font-weight: 700;
+    }
+    .dropdown ul li {
+      padding: 0.3rem 1.5rem;
+    }
+    .dropdown ul li span {
+      font-size: 1rem;
     }
   `],
   // styleUrls: ['./sample.layout.scss'],
@@ -30,22 +37,32 @@ import { StateService  } from '../../../@core/data/state.service';
                    tag="menu-sidebar"
                    responsive
                    [end]="sidebar.id === 'end'">
-        <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
+        <nb-sidebar-header *ngIf="currentTheme !== 'corporate'" style="padding-bottom: 0 ;">
+          
           <!-- a href="#" class="btn btn-hero-success main-btn">
             <i class="fas fa-globe-americas"></i>
             <span> 全局</span>
           </a -->
           <div class="dropdown" ngbDropdown>
-            <button class="btn btn-success" type="button" ngbDropdownToggle>
-              <i class="fas fa-globe-americas"></i>
-              <span> 全局</span>
+            <button class="btn btn-success main-btn" type="button" ngbDropdownToggle (click)="setMenu(0)">
+              <i class="fas fa-globe-americas" style="font-size: 1.6rem"></i>
+              <span class="pl-1.7 align-middle"> {{currItemText}}</span>
             </button>
             <ul class="dropdown-menu" ngbDropdownMenu>
-              <li class="dropdown-item">Icon Button</li>
-              <li class="dropdown-item">Hero Button</li>
-              <li class="dropdown-item">Default</li>
+             
+              <li class="dropdown-item" style="padding-left: 1.8rem;" (click)="setMenu(1)">
+                <i style="font-size: 1.5rem" class="fab fa-buromobelexperte"></i>
+                <span style="width: 100%" class="pl-1"> 网络c1</span>
+              </li>
+              <li class="dropdown-item pl-5"> <i style="font-size: 1.5rem" class="fas fa-cube"></i>
+                <span class="pl-1"> 示例项目</span>
+              </li>
+              
+              <div class="dropdown-divider"></div>
+              <li class="dropdown-item">demo</li>
             </ul>
           </div>
+          
         </nb-sidebar-header>
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
@@ -124,6 +141,13 @@ export class SampleLayoutComponent implements OnDestroy {
 
   private alive = true;
 
+  private currItemText = ' 全局';
+
+  @Output()
+  objectId : EventEmitter<any>  = new EventEmitter();
+
+  private id = 0 ;
+
   currentTheme: string;
 
   constructor(protected stateService: StateService,
@@ -161,7 +185,11 @@ export class SampleLayoutComponent implements OnDestroy {
         this.currentTheme = theme.name;
     });
   }
-
+  setMenu(p){
+    console.log('----setMenu----'+p);
+    this.id=p;
+    this.objectId.emit(this.id+'');
+  }
   ngOnDestroy() {
     this.alive = false;
   }

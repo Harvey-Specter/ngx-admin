@@ -2,23 +2,38 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Tables',
-    icon: 'nb-tables',
-    children: [
-      {
-        title: 'Smart Table',
-        link: '/pages/tables/smart-table',
-      },
-      {
-        title: '全部网络',
-        link: '/pages/tables/cluster-table',
-      },
-      {
-        title: '新建网络',
-        link: '/pages/tables/add-net',
-      },
-    ],
+    title: '网络',
+    icon: 'nb-keypad',
+    link: '/pages/net/net-table',
+    home: true,
   },
+  {
+    title: '项目',
+    icon: 'nb-layout-default',
+    link: '/pages/project/project-table',
+  },{
+    title: '用户',
+    icon: 'nb-person',
+    link: '/pages/user/user-table',
+  },
+  // {
+  //   title: 'Tables',
+  //   icon: 'nb-net',
+  //   children: [
+  //     {
+  //       title: 'Smart Table',
+  //       link: '/pages/net/smart-table',
+  //     },
+  //     // {
+  //     //   title: '全部网络',
+  //     //   link: '/pages/net/user-table',
+  //     // },
+  //     {
+  //       title: '新建网络',
+  //       link: '/pages/net/add-net',
+  //     },
+  //   ],
+  // },
   {
     title: 'E-commerce',
     icon: 'nb-e-commerce',

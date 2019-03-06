@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card>
+      <nb-card-header>
+        <span>创建用户</span>
+
+      </nb-card-header>
+      <nb-card-body>
+
+        <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="form-content">
+
+          <div class="row">
+            <div [ngClass]="{'form-group col-md-12 col-lg-12 col-xxxl-12':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
+              <label for="project_name">项目名称</label>
+
+              <a [ngClass]="{'d-none':desc,'add-desc':!desc}" href="javascript:void(0);" (click)="showDesc()">添加描述</a>
+
+              <div class="vali_err"
+                   *ngIf="firstForm.get('project_name').pending">搜索中...</div>
+
+              <div class="vali_err" [hidden]="!firstForm.hasError('required','emproject_nameail')||firstForm.get('project_name').untouched">请输入项目名称</div>
+
+              <div
+                class="vali_err"
+                *ngIf="firstForm.get('project_name').errors?.Exists">此项目已存在</div>
+
+              <input id="project_name" type="text" placeholder="我的项目名称" class="form-control" formControlName="project_name" [ngClass]="{'form-control-danger': firstForm.hasError('required','project_name')&&firstForm.get('project_name').touched }">
+
+            </div>
+
+            <div [ngClass]="{'d-none':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
+              <label for="project_desc">描述</label> <a class="add-desc" href="javascript:void(0);" (click)="showDesc()">描述</a>
+              <input value = "project_desc" id="project_desc" type="text" placeholder="例如：我的第一个项目描述" class="form-control" formControlName="project_desc">
+            </div>
+          </div>
+
+          <nb-card>
+            <nb-card-header>
+              <span style="float: left;color:#999">项目成员</span>
+
+            </nb-card-header>
+            <nb-card-body>
+
+              <div class="row" style="height: 5.7rem">
+                <div class="form-group col-md-5 col-lg-5 col-xxxl-5" >
+                  <label for="user_email">用户邮箱</label>
+
+                  <input id="user_email" type="text" placeholder="我的项目名称" class="form-control">
+
+                </div>
+
+                <div class="form-group col-md-5 col-lg-5 col-xxxl-5" >
+                  <label for="user_role">角色</label>
+
+                  <input id="user_role" type="text" placeholder="例如：只读" class="form-control" >
+                </div>
+              </div>
+
+              <div class="row" style="height:4rem">
+                <div class="form-group col-md-5 col-lg-5 col-xxxl-5" >
+
+                  <input id="user_email" type="text" placeholder="我的项目名称" class="form-control">
+
+                </div>
+
+                <div class="form-group col-md-5 col-lg-5 col-xxxl-5" >
+
+                  <input id="user_role" type="text" placeholder="例如：只读" class="form-control">
+
+                </div>
+
+                <div class="form-group col-md-1 col-lg-1 col-xxxl-1" >
+                  <button style="margin: 0.1rem" nbButton>删除</button>
+                </div>
+
+              </div>
+
+              <!-- -->
+              <div formArrayName="members" class="mt-5">
+
+                <div class="row" *ngFor="let member of firstForm.get('members').controls;let j =index" [ngStyle]="{'height':j > 0 && j < firstForm.get('members').controls.length-1 ? '4rem':'4rem'}" >
+                  <div [formGroupName]="j" class="col-md-12 col-lg-12 col-xxxl-12 row">
+                    <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                      <input formControlName="email" type="text"  class="form-control"
+                             [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                    </div>
+                    <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                      <input formControlName="role"  type="text"  class="form-control"
+                             [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-- -->
+
+              <button style="float: left" nbButton>添加成员</button>
+            </nb-card-body>
+          </nb-card>
+
+
+
+          <button [disabled]="firstForm.invalid || firstForm.pending" nbButton>创建</button>
+          <button nbButton (click)="back2list()">取消</button>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

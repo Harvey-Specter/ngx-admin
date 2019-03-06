@@ -1,0 +1,22 @@
+<nb-card>
+  <nb-card-header>
+    <span>网络</span>
+    <button nbButton size="small" status="primary" (click)="to_addnet()">创建项目</button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <div [style.display]="hasData ? 'block' : 'none'">
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (create)="onCreate()" (edit)="onEdit($event)">
+    </ng2-smart-table></div>
+    <div class = "add" [style.display]="hasData ? 'none'  : 'block'">
+      <i class="fab fa-schlix"></i>
+      <div class="btn-group btn-group-full-width" role="group">
+        <button type="button" class="btn btn-primary btn-group-icon btn-group-divider btn-fixed">
+          <i class="fas fa-plus"></i>
+        </button>
+        <button type="button" class="btn btn-primary" (click)="to_addnet()">创建项目</button>
+      </div>
+    </div>
+
+  </nb-card-body>
+</nb-card>

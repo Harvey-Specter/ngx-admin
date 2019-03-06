@@ -6,7 +6,7 @@ import { MENU_ITEMS } from './pages-menu';
   selector: 'ngx-pages',
   styleUrls: ['pages.component.scss'],
   template: `
-    <ngx-sample-layout>
+    <ngx-sample-layout (objectId)="objectIdHandler($event)">
       <nb-menu [items]="menu"></nb-menu>
       <router-outlet></router-outlet>
     </ngx-sample-layout>
@@ -15,4 +15,9 @@ import { MENU_ITEMS } from './pages-menu';
 export class PagesComponent {
 
   menu = MENU_ITEMS;
+  private  id;
+  objectIdHandler(id){
+    this.id=id;
+    console.log('ppp',this.id);
+  }
 }

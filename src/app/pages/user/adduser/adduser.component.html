@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card>
+      <nb-card-header>
+        <span>创建用户</span>
+
+      </nb-card-header>
+      <nb-card-body>
+
+            <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="form-content">
+
+              <div class="row">
+              <div [ngClass]="{'form-group col-md-12 col-lg-12 col-xxxl-12':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
+                <label for="email">邮箱</label>
+
+                <a [ngClass]="{'d-none':desc,'add-desc':!desc}" href="javascript:void(0);" (click)="showDesc()">添加描述</a>
+
+                <div class="vali_err"
+                  *ngIf="firstForm.get('email').pending">搜索中...</div>
+
+                <div class="vali_err" [hidden]="!firstForm.hasError('required','email')||firstForm.get('email').untouched">请输入邮箱</div>
+
+                <div
+                  class="vali_err"
+                  *ngIf="firstForm.get('email').errors?.Exists">此邮箱已存在</div>
+
+                <input id="email" type="text" placeholder="例如：Mary@gmail.com" class="form-control" formControlName="email" [ngClass]="{'form-control-danger': firstForm.hasError('required','email')&&firstForm.get('email').touched }">
+
+              </div>
+
+              <div [ngClass]="{'d-none':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
+                <label for="userdesc">用户描述</label> <a class="add-desc" href="javascript:void(0);" (click)="showDesc()">描述</a>
+                <input value = "userdesc" id="userdesc" type="text" placeholder="例如：我的第一个用户描述" class="form-control" formControlName="userdesc">
+              </div>
+              </div>
+
+              <div class="row" style="height: 6rem;">
+                <div class="form-group col-md-12 col-lg-12 col-xxxl-12" >
+                  <label for="password">密码</label>
+                  <div class="vali_err" [hidden]="!firstForm.hasError('required','passwd')||firstForm.get('passwd').untouched"  >请输入密码</div>
+                  <input id="password" type="password" class="form-control" formControlName="password" [ngClass]="{'form-control-danger': firstForm.hasError('required','password')&&firstForm.get('password').touched }">
+                </div>
+              </div>
+
+              <div class="row"  style="height: 3.5rem;">
+                <div class="form-group col-md-12 col-lg-12 col-xxxl-12" >
+                  <nb-checkbox formControlName="changepasswd" status="success" class="col-sm-4">首次登录要求用户修改密码</nb-checkbox>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-12 col-lg-12 col-xxxl-12" >
+                  <label for="displayname">显示名称</label>
+
+                  <input id="displayname" type="text" class="form-control" placeholder="例如：Mary Floric" formControlName="displayname">
+                </div>
+              </div>
+
+              <div class="row" style="min-height: 8.5rem;">
+                <div class="col-md-12 col-lg-12 col-xxxl-12">
+                  <label>角色&权限</label>
+                </div>
+                  <div class="form-group">
+                    <div class="form-check col-md-12 col-lg-12 col-xxxl-12 mb-3" >
+                      <label class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" formControlName="userrole" value="standard" checked>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"><span class="user_role">标准用户 </span>：标准用户可以创建网络和网络中的项目，也可以被赋予管理网络和项目的权限。</span>
+                      </label>
+                    </div>
+                    <div class="form-check col-md-12 col-lg-12 col-xxxl-12 mb-3">
+                      <label class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input"  formControlName="userrole" value="admin">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"><span class="user_role">超级用户 </span>：超级用户可以配置应用环境，安装或卸载组件，拥有所有网络和所有项目的操作权限。</span>
+                      </label>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xxxl-12 form-check mb-3">
+                      <label class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" formControlName="userrole" value="customer">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"><span class="user_role">自定义用户</span>：将特定的权限分配给用户</span>
+                      </label>
+                    </div>
+
+                  </div>
+              </div>
+
+              <div [ngClass]="{'d-none':firstForm.get('userrole').value!='customer','row demo-checkboxes-radio ml-2':firstForm.get('userrole')=='customer'}">
+                <div formGroupName="privileges" class="demo-checkboxes col-md-12 col-lg-12 col-xxxl-12">
+                  <nb-checkbox formControlName="cn">网络管理</nb-checkbox>
+                  <nb-checkbox>用户管理</nb-checkbox>
+                  <nb-checkbox>角色管理</nb-checkbox>
+                  <nb-checkbox>系统配置</nb-checkbox>
+                  <nb-checkbox>节点管理</nb-checkbox>
+                  <nb-checkbox formControlName="la">登录</nb-checkbox>
+                </div>
+              </div>
+
+              <button [disabled]="firstForm.invalid || firstForm.pending" nbButton>创建</button>
+              <button nbButton (click)="back2list()">取消</button>
+            </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

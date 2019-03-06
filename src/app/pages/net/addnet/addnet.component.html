@@ -1,0 +1,207 @@
+<div class="steppers-container row">
+  <div class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card>
+      <nb-card-body>
+        <nb-stepper #stepper>
+          <nb-step [stepControl]="firstForm" label="基本信息">
+            <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+              <p class="lorem">
+              创建区块链网络第一步：选择基础网络架构；填写网络名称，及联盟中的组织数量
+              </p>
+              <nb-card size="xxsmall" class="net-type">
+                <div ngbRadioGroup data-toggle="buttons"
+                     class="btn-group btn-group-toggle btn-divided-group btn-outline-divided-group btn-group-full-width">
+                  <label ngbButtonLabel class="btn btn-icon">
+                    <input  formControlName="nettype" ngbButton type="radio" value="k8s"/>Kubernetes<!--i class="nb-snowy-circled"></i -->
+                  </label>
+                  <label ngbButtonLabel class="btn btn-icon">
+                    <input  formControlName="nettype" ngbButton type="radio" value="swarm"/>Swarm<!-- i class="nb-sunny-circled"></i -->
+                  </label>
+                  <label ngbButtonLabel class="btn btn-icon active">
+                    <input  formControlName="nettype"  ngbButton type="radio" value="docker"/>Docker<!-- i class="nb-flame-circled"></i -->
+                  </label>
+                  <label ngbButtonLabel class="btn btn-icon">
+                    <input  formControlName="nettype"  ngbButton type="radio" value="import"/>import<!-- i class="nb-loop-circled"></i -->
+                  </label>
+                </div>
+              </nb-card>
+
+              <div class="row">
+              <div [ngClass]="{'form-group col-md-12 col-lg-12 col-xxxl-12':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
+                <label for="netname">网络名称</label>
+
+                <div style="float:left; margin-left: 1rem"
+                  *ngIf="firstForm.get('netname').pending">搜索中...</div>
+
+                <a [ngClass]="{'d-none':desc,'add-desc':!desc}" href="javascript:void(0);" (click)="showDesc()">描述</a>
+                <div class="vali_err" [hidden]="!firstForm.hasError('required','netname')||firstForm.get('netname').untouched"  >请输入网络名称</div>
+
+                <div
+                  class="vali_err"
+                  *ngIf="firstForm.get('netname').errors?.Exists">此网络名称已存在</div>
+
+                <input id="netname" type="text" placeholder="例如：我的第一个网络" class="form-control" formControlName="netname" [ngClass]="{'form-control-danger': firstForm.hasError('required','netname')&&firstForm.get('netname').touched }">
+
+              </div>
+
+              <div [ngClass]="{'d-none':desc==0,'form-group col-md-6 col-lg-6 col-xxxl-6':desc}" >
+                <label for="netdesc">网络描述</label> <a class="add-desc" href="javascript:void(0);" (click)="showDesc()">描述</a>
+                <input value = "netdesc" id="netdesc" type="text" placeholder="例如：我的第一个网络描述" class="form-control" formControlName="netdesc">
+              </div>
+
+              </div>
+              <div class="row">
+              <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
+                <label for="ordertype">排序服务类型</label>
+                <select id="ordertype" class="form-control" formControlName="ordertype">
+                  <option value="Kafka">Kafka</option>
+                  <option value="Solo">Solo</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
+                <label for="orgcnt">成员组织数量</label>
+                <input value = "1" id="orgcnt" type="text" placeholder="例如：1" class="form-control" type="number" formControlName="orgcnt">
+              </div>
+              </div>
+
+              <button [disabled]="firstForm.invalid || firstForm.pending" nbButton nbStepperNext (click)="onFirstSubmit()">下一步</button>
+            </form>
+          </nb-step>
+          <!--------------基本信息--end--------------------->
+          <nb-step [stepControl]="secondForm" label="组织信息">
+            <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+              <p class="lorem">
+                填写下面的排序组织和成员组织信息
+              </p>
+
+              <div formArrayName="orderinfo" class="mt-5">
+              <div class="row" *ngFor="let orderorg of secondForm.get('orderinfo').controls;let i =index" [ngStyle]="{'height':i > 0 && i < secondForm.get('orderinfo').controls.length-1 ? '3.8rem':'5.5rem'  }">
+              <div [formGroupName]="i" class="col-md-12 col-lg-12 col-xxxl-12 row"  >
+              <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                <label for="orderorgname" *ngIf="i==0">排序组织名称</label>
+                <input id="orderorgname" formControlName="orderorgname" type="text" placeholder="例如：order{{i}}Org" class="form-control"
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+
+              <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                <label for="orderorgdomain" *ngIf="i==0">排序组织域</label>
+                <input id="orderorgdomain" formControlName="orderorgdomain" type="text" placeholder="例如：muddy.com" class="form-control"
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+
+              <div class="form-group col-md-2 col-lg-2 col-xxxl-2">
+                <label for="ordercnt" *ngIf="i==0">排序节点数</label>
+                <input id="ordercnt" formControlName="ordercnt" type="text" placeholder="例如：1" class="form-control"
+                       [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+              </div>
+              </div>
+              </div>
+              </div>
+<!-----------下面是成员组织-------------->
+              <div formArrayName="orginfo" class="mt-5">
+              <div class="row" *ngFor="let org of secondForm.get('orginfo').controls;let j =index" [ngStyle]="{'height':j > 0 && j < secondForm.get('orginfo').controls.length-1 ? '4rem':'5.7rem'}" >
+              <div [formGroupName]="j" class="col-md-12 col-lg-12 col-xxxl-12 row">
+                <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                  <label for="orgname" *ngIf="j==0">组织名称</label>
+                  <input formControlName="orgname" id="orgname" type="text" placeholder="例如：Org{{j}}" class="form-control"
+                         [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                </div>
+                <div class="form-group col-md-5 col-lg-5 col-xxxl-5">
+                  <label for="orgdomain" *ngIf="j==0">组织域</label>
+                  <input formControlName="orgdomain" id="orgdomain" type="text" placeholder="例如：muddy.com" class="form-control"
+                         [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                </div>
+                <div class="form-group col-md-2 col-lg-2 col-xxxl-2">
+                  <label for="peercnt" *ngIf="j==0">组织节点数</label>
+                  <input formControlName="peercnt" id="peercnt" type="text" placeholder="例如：1" class="form-control"
+                         [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+                </div>
+              </div>
+              </div>
+              </div>
+              <!-----------上面是成员组织-------------->
+
+              <div class="mt-4">
+              <button nbButton nbStepperPrevious>上一步</button>
+              <button nbButton nbStepperNext (click)="onSecondSubmit()">下一步</button>
+              </div>
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="thirdForm" label="节点信息">
+            <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+              <p class="lorem">
+                Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
+              </p>
+              <div formArrayName="orderorgs" class="mt-5">
+                <div *ngFor="let orderorg of thirdForm.get('orderorgs').controls;let i =index">
+                  <div [formGroupName]="i" class="col-md-12 col-lg-12 col-xxxl-12">
+                    <div formArrayName="orderers" class="col-md-12 col-lg-12 col-xxxl-12">
+                    <div *ngFor="let orderer of orderorg.get('orderers').controls;let j =index" class="col-md-12 col-lg-12 col-xxxl-12">
+
+                      <div [formGroupName]="j" class="col-md-12 col-lg-12 col-xxxl-12 row" [ngStyle]="{'height':j > 0 && j < orderorg.get('orderers').controls.length-1 ? '3.8rem':'5.5rem'}">
+                        <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
+                          <label  *ngIf="j==0">排序节点主机名</label>
+                          <input formControlName="orderer_fullname" type="text" placeholder="例如：Org{{j}}" class="form-control" readonly>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
+                          <label  *ngIf="j==0">主机IP和宿主机端口</label>
+                          <input formControlName="orderer_hostname_port" type="text" placeholder="例如：muddy.com" class="form-control">
+                        </div>
+
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div formArrayName="orgs" class="mt-1">
+                <div *ngFor="let org of thirdForm.get('orgs').controls;let i =index" class="mb-4">
+
+                  <div [formGroupName]="i" class="col-md-12 col-lg-12 col-xxxl-12">
+                    <div formArrayName="peers" class="col-md-12 col-lg-12 col-xxxl-12">
+                      <div *ngFor="let peer of org.get('peers').controls;let j =index" class="col-md-12 col-lg-12 col-xxxl-12">
+
+                        <div [formGroupName]="j" class="col-md-12 col-lg-12 col-xxxl-12 row" [ngStyle]="{'height':j > 0 ? '4rem':'5.7rem'}" >
+                          <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
+                            <label  *ngIf="j==0">组织{{i+1}}主机名</label>
+                            <input formControlName="peer_fullname" type="text" placeholder="例如：Org{{j}}" class="form-control" readonly>
+                          </div>
+                          <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
+                            <label  *ngIf="j==0">主机IP和宿主机端口</label>
+                            <input formControlName="peer_hostname_port" type="text" placeholder="例如：muddy.com" class="form-control">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- div class="input-group">
+                <input type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
+                       [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}" >
+              </div -->
+              <div class="mt-4">
+              <button nbButton nbStepperPrevious>上一步</button>
+              <button nbButton nbStepperNext (click)="onThirdSubmit()">提交</button>
+              </div>
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
+            <div class="step-container">
+              <h2>创建网络成功!</h2>
+              <!-- button nbButton (click)="stepper.reset()">Try again</button -->
+              <button nbButton (click)="stepper.reset()">创建示例项目</button>
+              <button nbButton (click)="stepper.reset()">在创建一个网络</button>
+              <button nbButton (click)="backlist()">{{subscribeTimer}}秒后返回网络列表</button>
+            </div>
+          </nb-step>
+        </nb-stepper>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+
+</div>

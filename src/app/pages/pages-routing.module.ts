@@ -40,15 +40,22 @@ const routes: Routes = [{
     path: 'forms',
     loadChildren: './forms/forms.module#FormsModule',
   }, {
-    path: 'tables',
-    loadChildren: './tables/tables.module#TablesModule',
+    //path: 'net',
+    path: 'net',
+    loadChildren: './net/net.module#NetModule',
+  },{
+    path: 'project',
+    loadChildren: './project/project.module#ProjectModule',
+  },{
+    path: 'user',
+    loadChildren: './user/user.module#UserModule',
   }, {
     path: 'miscellaneous',
     loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
   }, {
     path: '',
-    // /pages/tables/add-net
-    redirectTo: 'tables/add-net',
+    // /pages/net/add-net
+    redirectTo: 'net/net-table',
     pathMatch: 'full',
   }, {
     path: '**',

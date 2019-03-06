@@ -1,0 +1,15 @@
+<nb-card size="small" accent="success" >
+  <nb-card-header>编辑网络信息</nb-card-header>
+  <nb-card-body>
+
+
+    <!-- form [formGroup]="editForm" (ngSubmit)="onEditSubmit()" -->
+      <input  nbInput #netname [value]="name" placeholder="网络名称" readonly>
+      <input  nbInput #netdesc [value]="desc" placeholder="网络描述">
+    <!-- /form -->
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton status="danget" (click)="cancel()">Cancel</button>
+    <button nbButton status="success" (click)="submit(netname.value,netdesc.value)">Submit</button>
+  </nb-card-footer>
+</nb-card>
