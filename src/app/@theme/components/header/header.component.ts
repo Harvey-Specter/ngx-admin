@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleSidebar(): boolean {
+    console.log('---------toggleSidebar--------------');
     this.sidebarService.toggle(true, 'menu-sidebar');
     this.layoutService.changeLayoutSize();
 

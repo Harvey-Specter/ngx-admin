@@ -17,6 +17,7 @@ export class UsersService {
   private saveUserUrl = '/v1/user/save';
   private updateUserUrl = '/v1/user/update';
   private findUserUrl = '/v1/user/find';
+  private filterUserUrl = '/v1/user/filter';
 
   constructor(private http: HttpClient){}
 
@@ -26,6 +27,15 @@ export class UsersService {
       catchError(this.handleError('addUser',[]))
     );
   }
+
+  getUsersFilterEmail (param): Observable<any> {
+    return this.http.post<User>(this.filterUserUrl,param,httpOptions)
+      .pipe(
+        tap(rs => console.log(rs)),
+        catchError(this.handleError('getUsers', []))
+      );
+  }
+
   getUsers (): Observable<any> {
     return this.http.get<any>(this.userUrl)
       .pipe(

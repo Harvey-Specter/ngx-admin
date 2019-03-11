@@ -12,12 +12,13 @@ const httpOptions = {
 } ;
 
 @Injectable()
-export class UsersService {
+export class ProjectService {
 
   private projectUrl = '/v1/project/getall';
   private saveProjectUrl = '/v1/project/save';
   private updateProjectUrl = '/v1/project/update';
   private findProjectUrl = '/v1/project/find';
+  private saveMemberUrl = '/v1/project/savemember';
 
   constructor(private http: HttpClient){}
 
@@ -39,6 +40,13 @@ export class UsersService {
         tap(rs => console.log(rs)),
         catchError(this.handleError('updateProject', []))
       );
+  }
+
+  saveMember (data): Observable<any> {
+    return this.http.post<any>(this.saveMemberUrl,data,httpOptions).pipe(
+      tap(rs => console.log(rs)),
+      catchError(this.handleError('saveMember', []))
+    );
   }
 
   searchProject(text) {

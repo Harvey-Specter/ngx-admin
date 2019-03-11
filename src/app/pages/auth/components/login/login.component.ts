@@ -53,6 +53,8 @@ export class NbLoginComponent {
       if (result.isSuccess()) {
         //this.messages = result.getMessages();
         this.messages = ['验证成功'];
+        localStorage.setItem('sid',result.getResponse().body.data);
+        console.log('sid----',localStorage.getItem('sid'));
       } else {
         //this.errors = result.getErrors();
         this.errors = ['邮箱或密码错误'];

@@ -129,7 +129,7 @@ export class ProjectTableComponent {
         .onClose.subscribe(data => data && this.updateNet(data));
         //.onClose.subscribe(name => name && this.names.push(name));
   }
-  to_addnet(){
+  to_addproject(){
     console.info('----to_addnet------');
     this.router.navigate(['/pages/project/add-project']);
   }

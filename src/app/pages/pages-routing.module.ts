@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import { PermissionGuard } from '../@core/data/PermissionGuard';
 
 const routes: Routes = [{
   path: '',
@@ -12,6 +13,7 @@ const routes: Routes = [{
   children: [{
     path: 'dashboard',
     component: ECommerceComponent,
+    canActivate: [PermissionGuard],
   }, {
     path: 'iot-dashboard',
     component: DashboardComponent,
@@ -43,12 +45,15 @@ const routes: Routes = [{
     //path: 'net',
     path: 'net',
     loadChildren: './net/net.module#NetModule',
+    canActivate: [PermissionGuard],
   },{
     path: 'project',
     loadChildren: './project/project.module#ProjectModule',
+    canActivate: [PermissionGuard],
   },{
     path: 'user',
     loadChildren: './user/user.module#UserModule',
+    canActivate: [PermissionGuard],
   }, {
     path: 'miscellaneous',
     loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
@@ -57,6 +62,7 @@ const routes: Routes = [{
     // /pages/net/add-net
     redirectTo: 'net/net-table',
     pathMatch: 'full',
+    canActivate: [PermissionGuard],
   }, {
     path: '**',
     component: NotFoundComponent,
