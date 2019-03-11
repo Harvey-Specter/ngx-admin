@@ -2,7 +2,9 @@
      [class.left]="position === 'normal'"
      [class.right]="position === 'inverse'">
   <div class="logo-containter">
-    <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
+
+    <a href="#" class="navigation"><i class="fab fa-schlix"></i></a>
+    <!-- a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a -->
     <div class="logo" (click)="goToHome()"><span>Muddy</span></div>
   </div>
   <ngx-theme-switcher></ngx-theme-switcher>
