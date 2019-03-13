@@ -10,7 +10,8 @@ import { PermissionGuard } from '../@core/data/PermissionGuard';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
-  children: [{
+  children: [
+    {
     path: 'dashboard',
     component: ECommerceComponent,
     canActivate: [PermissionGuard],
@@ -42,7 +43,10 @@ const routes: Routes = [{
     path: 'forms',
     loadChildren: './forms/forms.module#FormsModule',
   }, {
-    //path: 'net',
+      path: 'miscellaneous',
+      loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
+  },
+  {
     path: 'net',
     loadChildren: './net/net.module#NetModule',
     canActivate: [PermissionGuard],
@@ -54,9 +58,6 @@ const routes: Routes = [{
     path: 'user',
     loadChildren: './user/user.module#UserModule',
     canActivate: [PermissionGuard],
-  }, {
-    path: 'miscellaneous',
-    loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
   }, {
     path: '',
     // /pages/net/add-net

@@ -47,7 +47,7 @@ export class AddProjectComponent implements OnInit {
   }
 
   onFirstSubmit() {
-
+    console.log(this.firstForm.value);
   }
   openAddMember(){
     console.log('---------openAddMember----------');
