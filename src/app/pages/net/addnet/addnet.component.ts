@@ -20,6 +20,7 @@ export class AddnetComponent implements OnInit {
   private firstForm: FormGroup;
   private secondForm: FormGroup;
   private thirdForm: FormGroup;
+  //nettype = 'docker';
 
   get orderinfo() { return this.secondForm.get('orderinfo') as FormArray; }
   get orginfo(){return this.secondForm.get('orginfo') as FormArray; }
@@ -58,7 +59,7 @@ export class AddnetComponent implements OnInit {
   }
   ngOnInit() {
     this.firstForm = this.fb.group({
-      nettype: ['docker',Validators.required],
+      nettype: ['docker' , Validators.required],
       netname: ['c1', Validators.required, this.netService.netNameValidator()],
       netdesc: ['desc'],
       ordertype: ['Solo'],
@@ -73,11 +74,7 @@ export class AddnetComponent implements OnInit {
   }
 
   onFirstSubmit() {
-    // this.firstForm.markAsDirty();
-    // console.info(this.firstForm.value.orgcnt);
 
-    // this.firstForm.get('orgcnt') as FormContro
-    // const orderinfo = this.secondForm.get('orderinfo') as FormArray;
     this.initSecondForm();
     this.addOrderOrg();
     for (let i = 0 ; i < this.firstForm.value.orgcnt; i++) {
@@ -179,7 +176,7 @@ export class AddnetComponent implements OnInit {
   }
   backlist(){
     this.subject.next();
-    this.router.navigate(['/pages/net/user-table']);
+    this.router.navigate(['/pages/net/net-table']);
   }
   stopandrediect(val){
     console.log(val, '=');

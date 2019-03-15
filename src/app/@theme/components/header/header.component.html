@@ -20,7 +20,7 @@
     [class.left]="position === 'inverse'">
     <!-- nb-action icon="nb-gear" class="toggle-layout" (click)="toggleSettings()"></nb-action -->
     <nb-action *nbIsGranted="['view', 'user']" >
-    <nb-user [nbContextMenu]="userMenu" [name]="user?.email" [picture]="user?.picture"></nb-user>
+    <nb-user [nbContextMenu]="userMenu" [name]="user?.email" [picture]="'https://avatars.dicebear.com/v2/jdenticon/'+user.email+'.svg'"></nb-user>
 
     </nb-action>
     <nb-action class="control-item" disabled icon="nb-notifications"></nb-action>

@@ -9,16 +9,15 @@
               创建区块链网络第一步：选择基础网络架构；填写网络名称，及联盟中的组织数量
               </p>
               <nb-card size="xxsmall" class="net-type">
-                <div ngbRadioGroup data-toggle="buttons"
-                     class="btn-group btn-group-toggle btn-divided-group btn-outline-divided-group btn-group-full-width">
+                <div formControlName="nettype" ngbRadioGroup data-toggle="buttons" class="btn-group btn-group-toggle btn-divided-group btn-outline-divided-group btn-group-full-width">
                   <label ngbButtonLabel class="btn btn-icon">
                     <input  formControlName="nettype" ngbButton type="radio" value="k8s"/>Kubernetes<!--i class="nb-snowy-circled"></i -->
                   </label>
                   <label ngbButtonLabel class="btn btn-icon">
                     <input  formControlName="nettype" ngbButton type="radio" value="swarm"/>Swarm<!-- i class="nb-sunny-circled"></i -->
                   </label>
-                  <label ngbButtonLabel class="btn btn-icon active">
-                    <input  formControlName="nettype"  ngbButton type="radio" value="docker"/>Docker<!-- i class="nb-flame-circled"></i -->
+                  <label ngbButtonLabel checked="checked" class="btn btn-icon">
+                    <input  formControlName="nettype"  ngbButton type="radio" value="docker" checked="checked"/>Docker<!-- i class="nb-flame-circled"></i -->
                   </label>
                   <label ngbButtonLabel class="btn btn-icon">
                     <input  formControlName="nettype"  ngbButton type="radio" value="import"/>import<!-- i class="nb-loop-circled"></i -->
@@ -145,8 +144,8 @@
                           <input formControlName="orderer_fullname" type="text" placeholder="例如：Org{{j}}" class="form-control" readonly>
                         </div>
                         <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
-                          <label  *ngIf="j==0">主机IP和宿主机端口</label>
-                          <input formControlName="orderer_hostname_port" type="text" placeholder="例如：muddy.com" class="form-control">
+                          <label  *ngIf="j==0">宿主机IP及端口</label>
+                          <input formControlName="orderer_hostname_port" type="text" placeholder="IP:PORT" class="form-control">
                         </div>
 
                       </div>
@@ -169,8 +168,8 @@
                             <input formControlName="peer_fullname" type="text" placeholder="例如：Org{{j}}" class="form-control" readonly>
                           </div>
                           <div class="form-group col-md-6 col-lg-6 col-xxxl-6">
-                            <label  *ngIf="j==0">主机IP和宿主机端口</label>
-                            <input formControlName="peer_hostname_port" type="text" placeholder="例如：muddy.com" class="form-control">
+                            <label  *ngIf="j==0">宿主机IP及端口</label>
+                            <input formControlName="peer_hostname_port"  placeholder="IP:PORT" type="text" class="form-control">
                           </div>
                         </div>
                       </div>

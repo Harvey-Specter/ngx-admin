@@ -10,4 +10,5 @@ export class Net {
   ordertype : string;
   orderorgs: Array<OrderOrg>;
   orgs: Array<Org>;
+  project : string;
 }

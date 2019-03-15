@@ -42,16 +42,17 @@
       }
     }
   }
+/**.nb-theme-cosmic nb-sidebar .main-container**/
 
   nb-sidebar.menu-sidebar {
 
     margin-top: nb-theme(sidebar-header-gap);
-
+    width: 12.5rem !important;
     @include nb-for-theme(corporate) {
       margin-top: 0;
     }
-
     /deep/ .main-container {
+      width: 12.5rem !important;
       height:
         calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)} - #{nb-theme(sidebar-header-gap)}) !important;
       @include nb-ltr(border-top-right-radius, nb-theme(radius));

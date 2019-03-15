@@ -10,6 +10,8 @@ import {
 } from '@nebular/theme';
 
 import { StateService  } from '../../../@core/data/state.service';
+import {NetService} from '../../../@core/data/net.service';
+import {Net} from '../../../@core/data/net';
 
 
 // TODO: move layouts into the framework
@@ -22,18 +24,22 @@ import { StateService  } from '../../../@core/data/state.service';
     .dropdown ul li {
       padding: 0.3rem 1.5rem;
     }
+    .dropdown ul li:hover {
+      background-color: #20c997;
+      cursor:pointer;
+    }
     .dropdown ul li span {
       font-size: 1rem;
     }
   `],
-  // styleUrls: ['./sample.layout.scss'],
+  styleUrls: ['./sample.layout.scss'],
   template: `
     <nb-layout [center]="layout.id === 'center-column'" windowMode>
       <nb-layout-header fixed>
         <ngx-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'"></ngx-header>
       </nb-layout-header>
 
-      <nb-sidebar class="menu-sidebar"
+      <nb-sidebar style="width:12.25rem !important;" class="menu-sidebar"
                    tag="menu-sidebar"
                    responsive
                    [end]="sidebar.id === 'end'">
@@ -44,12 +50,26 @@ import { StateService  } from '../../../@core/data/state.service';
             <span> 全局</span>
           </a -->
           <div class="dropdown" ngbDropdown>
-            <button class="btn btn-success main-btn" type="button" ngbDropdownToggle (click)="setMenu(0)">
+            <button class="btn btn-success main-btn" type="button" ngbDropdownToggle style="padding: 0.75rem 1.2rem">
               <i class="fas fa-globe-americas" style="font-size: 1.6rem"></i>
-              <span class="pl-1.7 align-middle"> {{currItemText}}</span>
+              <span class="pl-1.4 align-middle"> {{currItemText}}</span>
             </button>
-            <ul class="dropdown-menu" ngbDropdownMenu>
-             
+            <ul class="dropdown-menu" ngbDropdownMenu style="padding: 0.05rem 0">
+              
+              <li class="dropdown-item" style="padding-left: 1.4rem;" (click)="setMenu(0,' 全局')">
+                <i style="font-size: 1.5rem" class="fas fa-globe-americas"></i>
+                <span style="width: 100%" class="pl-1"> 全局</span>
+              </li>
+              <div class="dropdown-divider"></div>
+              <div *ngFor="let net of nets">
+              <li class="dropdown-item" style="padding-left: 1.8rem;" (click)="setMenu(1,net.name)">
+                <i style="font-size: 1.5rem" class="fab fa-buromobelexperte"></i>
+                <span style="width: 100%" class="pl-1"> 网络:{{net.name}}</span>
+              </li>
+
+              <div class="dropdown-divider"></div>
+              </div>
+                
               <li class="dropdown-item" style="padding-left: 1.8rem;" (click)="setMenu(1)">
                 <i style="font-size: 1.5rem" class="fab fa-buromobelexperte"></i>
                 <span style="width: 100%" class="pl-1"> 网络c1</span>
@@ -140,8 +160,8 @@ export class SampleLayoutComponent implements OnDestroy {
   sidebar: any = {};
 
   private alive = true;
-
   private currItemText = ' 全局';
+  private nets : Array<Net>;
 
   @Output()
   objectId : EventEmitter<any>  = new EventEmitter();
@@ -154,7 +174,8 @@ export class SampleLayoutComponent implements OnDestroy {
               protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService) {
+              protected sidebarService: NbSidebarService,
+              private netService: NetService) {
     this.stateService.onLayoutState()
       .pipe(takeWhile(() => this.alive))
       .subscribe((layout: string) => this.layout = layout);
@@ -184,9 +205,21 @@ export class SampleLayoutComponent implements OnDestroy {
       .subscribe(theme => {
         this.currentTheme = theme.name;
     });
+    this.getNets();
   }
-  setMenu(p){
-    console.log('----setMenu----'+p);
+
+  getNets(): void {
+    this.netService.getNets()
+      .subscribe(nets => {
+        this.nets=nets;
+        console.log('sample-layout-------'+this.nets);
+      });
+  }
+  setMenu(p,curr_name){
+    console.log('----setMenu----',p,curr_name);
+    if(p===1) curr_name='网络:'+curr_name;
+    else if (p===2) curr_name='项目:'+curr_name;
+    this.currItemText=curr_name;
     this.id=p;
     this.objectId.emit(this.id+'');
   }

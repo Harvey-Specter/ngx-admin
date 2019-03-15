@@ -86,7 +86,7 @@ export class ClusterTableComponent {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private netService: NetService,private service: ClusterTableService, private router: Router,private dialogService: NbDialogService) {
+  constructor(private netService: NetService, private router: Router,private dialogService: NbDialogService) {
     this.getNets();
     // const data = this.service.getData();
     // if (data.length === 0 ) {
