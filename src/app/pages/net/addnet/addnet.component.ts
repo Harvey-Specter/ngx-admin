@@ -149,12 +149,13 @@ export class AddnetComponent implements OnInit {
     console.info({ 'first' : this.firstForm.value , 'second' : this.secondForm.value , 'third' : this.thirdForm.value}) ;
 
     const form3value=this.thirdForm.value;
-    //const orderorgs = form3value.orderorgs;
-    //const orgs=form3value.orgs;
+
     form3value.nettype = this.firstForm.value.nettype;
     form3value.netname = this.firstForm.value.netname;
     form3value.netdesc = this.firstForm.value.netdesc;
     form3value.ordertype = this.firstForm.value.ordertype;
+
+    console.log('body----',JSON.stringify(form3value));
 
     this.addNet(form3value as Net);
 
