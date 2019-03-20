@@ -111,7 +111,7 @@ export class AddnetComponent implements OnInit {
       const orderers = this.fb.array([]);
       for (let j = 0 ; j < orderorgval.ordercnt ; j++ ) {
 
-        const orderer = this.fb.group({orderorg_name:orderorgval.orderorgname,orderorg_fullname:orderorg_fullname, orderer_fullname: 'orderer' + j + '.' + orderorg_fullname, orderer_hostname_port : '192.168.'+(i+20)+','+(j+10)+':7051' });
+        const orderer = this.fb.group({orderorg_fullname:orderorg_fullname, orderer_fullname: 'orderer' + j + '.' + orderorg_fullname, orderer_hostname_port : '192.168.'+(i+20)+','+(j+10)+':7051' });
 
         orderers.push(orderer);
       }
@@ -129,7 +129,7 @@ export class AddnetComponent implements OnInit {
       const peers = this.fb.array([]);
       for (let j = 0 ; j < orgval.peercnt ; j++ ) {
 
-        const peer = this.fb.group({org_name:orgval.orgname,org_fullname:org_fullname, peer_fullname: 'peer' + j + '.' + org_fullname, peer_hostname_port : '192.168.'+(i+20)+','+(j+10)+':7051' });
+        const peer = this.fb.group({org_fullname:org_fullname, peer_fullname: 'peer' + j + '.' + org_fullname, peer_hostname_port : '192.168.'+(i+20)+','+(j+10)+':7051' });
 
         peers.push(peer);
       }

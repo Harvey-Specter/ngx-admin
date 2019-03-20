@@ -5,6 +5,5 @@ export class Peer {
   peer_fullname:string;
   peer_hostname_port: string;
   org_fullname : string;
-  org_name:string;
   //array1:Array<number>;
 }
